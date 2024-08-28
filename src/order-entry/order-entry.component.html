@@ -1,0 +1,109 @@
+<h2>Order Entry Screen UI</h2>
+
+<!-- Toppings Selection -->
+<div>
+  <button (click)="changeQuantity(-1)" [disabled]="pizzaQuantity <= 1">
+    -
+  </button>
+  {{ pizzaQuantity }}
+  <button (click)="changeQuantity(1)">+</button>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2">Toppings</th>
+      <th colspan="4">Pizza Size</th>
+    </tr>
+    <tr>
+      <th *ngFor="let size of pizzaSizes">
+        <label>
+          <input
+            type="radio"
+            name="pizzaSize"
+            [value]="size.name"
+            (change)="onSizeSelected(size)"
+          />
+          {{ size.name }} (${{ size.price }})
+        </label>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Veg Toppings -->
+    <tr>
+      <td colspan="5"><strong>Veg Toppings</strong></td>
+    </tr>
+    <tr *ngFor="let topping of vegToppings">
+      <td>{{ topping.name }} ({{ topping.price | currency }})</td>
+      <td>
+        <input type="checkbox" (change)="onToppingSelected(topping, 'small')" />
+      </td>
+      <td>
+        <input
+          type="checkbox"
+          (change)="onToppingSelected(topping, 'medium')"
+        />
+      </td>
+      <td>
+        <input type="checkbox" (change)="onToppingSelected(topping, 'large')" />
+      </td>
+      <td>
+        <input
+          type="checkbox"
+          (change)="onToppingSelected(topping, 'extraLarge')"
+        />
+      </td>
+    </tr>
+
+    <!-- Non-Veg Toppings -->
+    <tr>
+      <td colspan="5"><strong>Non-Veg Toppings</strong></td>
+    </tr>
+    <tr *ngFor="let topping of nonVegToppings">
+      <td>{{ topping.name }} ({{ topping.price | currency }})</td>
+      <td>
+        <input type="checkbox" (change)="onToppingSelected(topping, 'small')" />
+      </td>
+      <td>
+        <input
+          type="checkbox"
+          (change)="onToppingSelected(topping, 'medium')"
+        />
+      </td>
+      <td>
+        <input type="checkbox" (change)="onToppingSelected(topping, 'large')" />
+      </td>
+      <td>
+        <input
+          type="checkbox"
+          (change)="onToppingSelected(topping, 'extraLarge')"
+        />
+      </td>
+    </tr>
+
+    <!-- Order Summary -->
+    <tr>
+      <td colspan="5"><strong>Total</strong></td>
+    </tr>
+    <tr *ngIf="isMediumOrLargeSelected()">
+      <td colspan="2"><strong>Offers</strong></td>
+      <td colspan="3">
+        <div *ngFor="let offer of offers">
+          <label>
+            <input
+              type="checkbox"
+              [value]="offer"
+              (change)="onOfferChecked($event, offer)"
+            />
+            {{ offer.name }} - {{ offer.description }}
+          </label>
+        </div>
+      </td>
+    </tr>
+
+    <tr class="total-row">
+      <td colspan="2">Total Price</td>
+      <td colspan="2">${{ totalPrice.toFixed(2) }}</td>
+    </tr>
+  </tbody>
+</table>
