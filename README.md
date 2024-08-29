@@ -1,6 +1,6 @@
 # Angular-Pizza-Ordering-System
 
-(https://stackblitz.com/~/github.com/rajnada/angular-pizza-ordering-system)
+(https://stackblitz.com/edit/angular-h2ewb4)
 
 **Preview of the UI:**
 
